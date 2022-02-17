@@ -1,0 +1,53 @@
+body {
+    background-color: #333;
+    color: #ddd;
+    font-family: system-ui;
+    
+}
+
+a {
+    text-decoration: none;
+    color: cornflowerblue;
+    
+}
+
+details {
+    margin: 10px;
+    border: 1px solid rgb(136, 136, 136);
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.3) 3px 3px 10px;
+    
+}
+
+summary {
+    background-color: rgb(34,34,34);
+    border-bottom: 1px dashed black;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    user-select: none;
+    
+}
+
+.content {
+    padding: 10px;
+}
+
+button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #33f;
+    border-radius: 20px;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, 0.3) 3px 3px 10px;
+    transition: 0.5s;
+    cursor: pointer
+}
+
+button:hover {
+    background-color: #55f;
+}
