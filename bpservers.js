@@ -25,6 +25,10 @@ function prepareHTML() {
 	document.body.innerHTML = '';
 }
 
+function connectToServer(ip) {
+	window.open(`steam://run/696370//-connect ${ip}/`);
+}
+
 async function getVersion() {
 	let req = await fetch('https://api.allorigins.win/raw?url=https://brokeprotocol.com/version');
 	return await req.json();
@@ -64,6 +68,13 @@ async function updateServerList() {
 		content.className = 'content';
 		details.appendChild(content);
 		
+		let connectButton = document.createElement('a');
+		connectButton.className = 'button';
+		connectButton.innerHTML = 'Connect (Steam only)';
+		connectButton.onclick = function() {
+			connectToServer(`{server.IP}:${server.Port}`);
+		}
+		
 		let map = document.createElement('div');
 		map.innerHTML = '<b>Map:</b> ' + server.Map.Name;
 		map.title = `Filesize: ${server.Map.Filesize}\nHash: ${server.Map.Hash}`;
@@ -78,7 +89,7 @@ async function updateServerList() {
 		content.appendChild(ip);
 		
 		let difficulty = document.createElement('div');
-		difficulty.innerHTML = '<b>Difficulty:</b> ' + server.Difficulty;
+		difficulty.innerHTML = '<b>Difficulty:</b> ' + parseFloat(server.Difficulty)*100 + '%';
 		content.appendChild(difficulty);
 		
 		let whitelist = document.createElement('div');
