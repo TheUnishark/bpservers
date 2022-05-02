@@ -74,6 +74,7 @@ async function updateServerList() {
 		connectButton.onclick = function() {
 			connectToServer(`{server.IP}:${server.Port}`);
 		}
+		content.appendChild(connectButton);
 		
 		let map = document.createElement('div');
 		map.innerHTML = '<b>Map:</b> ' + server.Map.Name;
