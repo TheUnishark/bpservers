@@ -33,6 +33,10 @@ summary {
     padding: 10px;
 }
 
+div {
+    margin: 2px 0px
+}
+
 button {
     position: absolute;
     top: 15px;
@@ -51,11 +55,10 @@ button {
 .button {
     background-color: #33f;
     border-radius: 20px;
-    padding: 5px;
+    padding: 1px 10px;
     color: white;
     font-weight: bold;
     border-style: none;
-    box-shadow: rgb(0 0 0 / 30%) 3px 3px 10px;
     transition: 0.5s;
     cursor: pointer;
 }
