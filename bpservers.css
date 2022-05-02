@@ -48,6 +48,18 @@ button {
     cursor: pointer
 }
 
-button:hover {
+.button {
+    background-color: #33f;
+    border-radius: 20px;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+    border-style: none;
+    box-shadow: rgb(0 0 0 / 30%) 3px 3px 10px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+button:hover, .button:hover {
     background-color: #55f;
 }
