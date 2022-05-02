@@ -72,7 +72,7 @@ async function updateServerList() {
 		connectButton.className = 'button';
 		connectButton.innerHTML = 'Connect (Steam only)';
 		connectButton.onclick = function() {
-			connectToServer(`{server.IP}:${server.Port}`);
+			connectToServer(`${server.IP}:${server.Port}`);
 		}
 		content.appendChild(connectButton);
 		
