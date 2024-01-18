@@ -37,7 +37,7 @@ class Utils {
 
     static async getVersion() {
         let req = await fetch('https://bpservers-proxy.onrender.com/version');
-        return await req.json();
+        return (await req.text()).replace(/(\r\n|\n|\r)/gm, "");
     }
 
     static async getNews() {

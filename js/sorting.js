@@ -44,7 +44,7 @@ class Sorting {
                 if (desc) Servers.filteredServers = Servers.filteredServers.reverse();
                 break;
             case 'version':
-                Servers.filteredServers.sort((a, b) => parseFloat(a.Version) - parseFloat(b.Version));
+                Servers.filteredServers.sort((a, b) => a.Version.localeCompare(b.Version));
                 if (desc) Servers.filteredServers = Servers.filteredServers.reverse();
                 break;
             case 'validation':

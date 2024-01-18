@@ -21,7 +21,7 @@ class Servers {
             x.TotalSize = x.TotalAssetsSize + x.Map.Filesize;
     
             // Server validity
-            x.UpToDate = parseFloat(x.Version) == BPServers.version;
+            x.UpToDate = x.Version == BPServers.version;
             x.Valid = x.Validation === '+';
             x.CanConnect = x.UpToDate && x.PlayerCount < x.PlayerLimit && !x.Whitelist && x.Valid;
         })

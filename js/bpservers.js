@@ -2,7 +2,7 @@ class BPServers {
     static name = 'BP Server List';
 
     static playerCount = 0;
-    static version = 0;
+    static version = '';
     static updateNotes = '';
 
     static async reload() {
@@ -10,16 +10,16 @@ class BPServers {
         Loading.startLoading();
         let failed = false;
 
-        try {
+        //try {
             BPServers.version = await Utils.getVersion();
             BPServers.updateNotes = await Utils.getNews();
             await Servers.loadServers();
             await Countries.loadCountries();
             Sorting.loadFilters();
-        } catch (e) {
+        /*} catch (e) {
             console.error(e);
             failed = true;
-        }
+        }*/
 
         Loading.endLoading();
         
