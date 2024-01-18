@@ -1,0 +1,242 @@
+body {
+    background-color: #333;
+    color: #ddd;
+    font-family: system-ui;
+    margin: 10px 20px;
+}
+
+a {
+    text-decoration: none;
+    color: cornflowerblue;
+}
+
+details {
+    margin: 10px 0px;
+}
+
+summary {
+    background-color: rgb(34,34,34);
+    padding: 10px;
+    cursor: pointer;
+    user-select: none;
+    transition: 0.2s;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+summary:hover {
+    background-color: #3f3f3f;
+}
+
+summary>* {
+    margin-right: 5px;
+}
+
+.content {
+    padding: 10px;
+    background-color: #282828;
+    display: flex;
+    flex-direction: column;
+}
+
+.content>div {
+    margin: 2px 0px
+}
+
+button {
+    background-color: #1d1dad;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    border-style: none;
+    transition: 0.5s;
+    cursor: pointer
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button {
+    display: block;
+    width: fit-content;
+    background-color: #1d1dad;
+    padding: 5px 10px;
+    color: white;
+    font-weight: bold;
+    border-style: none;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+button:hover, .button:hover {
+    background-color: #00f;
+}
+
+table {
+    width: 100%;
+    border-spacing: 0;
+}
+
+tr {
+    background-color: rgb(34 34 34);
+    transition: 0.2s;
+    cursor: pointer;
+    user-select: none;
+}
+
+tr:hover {
+    background-color: #3f3f3f;
+}
+
+tr.outdated:hover {
+    background-color: #3c2525;
+}
+
+tr.info {
+    display: none;
+    background-color: #181818;
+    cursor: default;
+    user-select: auto;
+}
+
+tr.info:hover {
+    background-color: #181818;
+}
+
+td {
+    padding: 0.5em 1em;
+    width: 0;
+}
+
+td.name {
+    width: max-content;
+}
+
+td:not(.name) {
+    text-align: center;
+}
+
+tr.info td {
+    text-align: left !important;
+}
+
+.icon {
+    height: 1em;
+}
+
+.filters {
+    background-color: rgb(34 34 34);
+    padding: 0.5em 1em;
+}
+
+.filters>* {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
+
+.filters>*:first-child {
+    margin-bottom: 1em;
+}
+
+input {
+    background-color: #3e3e3e;
+    border: none;
+    cursor: pointer;
+    margin: 0 2em 0 0.5em;
+}
+
+select {
+    background-color: #3e3e3e;
+    color: white;
+    padding: 5px 1px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 2em 0 0.5em;
+}
+
+select.no-margin {
+    margin: 0 0 0 0.5em;;
+}
+
+select:focus {
+    outline: none;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+.label-button {
+    cursor: pointer;
+    color: #888;
+    margin: 0 0.5em;
+    font-size: calc(1em + 4px);
+    transition: 0.2s;
+    user-select: none;
+}
+
+input[type="radio"]:checked+label {
+    color: #fff;
+    text-shadow: rgb(255 255 255 / 50%) 0 0 15px;
+}
+
+.news {
+    cursor: help;
+    user-select: none;
+}
+
+.modal-background {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal {
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 80%;
+    background-color: #262626;
+    translate: -50% -50%;
+    border-radius: 5px;
+    box-shadow: 3px 3px 20px 0px rgba(0,0,0,0.3);
+    padding: 10px 20px;
+}
+
+.modal>.modal-content {
+    overflow: auto;
+    height: calc(100% - 80px);
+}
+
+.modal>.close {
+    font-size: xx-large;
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    cursor: pointer;
+    transition: 0.2s;
+    overflow: hidden;
+}
+
+.modal>.close:hover {
+    color: #fff;
+}
