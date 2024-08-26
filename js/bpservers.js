@@ -18,6 +18,7 @@ class BPServers {
             Servers.servers = responses[2];
 
             Servers.loadServers();
+            Sorting.loadFilters();
         } catch (e) {
             console.error(e)
             failed = true;
