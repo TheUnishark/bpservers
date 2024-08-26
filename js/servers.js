@@ -19,18 +19,18 @@ class Servers {
             }
     
             x.TotalSize = x.TotalAssetsSize + x.Map.Filesize;
-    
-            // Server validity
-            x.UpToDate = x.Version == BPServers.version;
-            x.Valid = x.Validation === '+';
-            x.CanConnect = x.UpToDate && x.PlayerCount < x.PlayerLimit && !x.Whitelist && x.Valid;
         })
     
         return servers;
     }
 
-    static async loadServers() {
-        Servers.servers = await Servers.getServers();
+    static loadServers() {
+        Servers.servers.forEach(x => {
+            x.UpToDate = x.Version == BPServers.version;
+            x.Valid = x.Validation === '+';
+            x.CanConnect = x.UpToDate && x.PlayerCount < x.PlayerLimit && !x.Whitelist && x.Valid;
+        })
+
         Servers.filteredServers = structuredClone(Servers.servers);
     }
 }

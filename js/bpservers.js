@@ -11,13 +11,15 @@ class BPServers {
         let failed = false;
 
         try {
-            BPServers.version = await Utils.getVersion();
-            BPServers.updateNotes = await Utils.getNews();
-            await Servers.loadServers();
-            await Countries.loadCountries();
-            Sorting.loadFilters();
+            let responses = await Promise.all([Utils.getVersion(), Utils.getNews(), Servers.getServers(), Countries.loadCountries()]);
+
+            BPServers.version = responses[0];
+            BPServers.updateNotes = responses[1];
+            Servers.servers = responses[2];
+
+            Servers.loadServers();
         } catch (e) {
-            console.error(e);
+            console.error(e)
             failed = true;
         }
 
