@@ -20,14 +20,7 @@ class Loading {
 
     static showLoading() {
         document.title = BPServers.name + ' (Loading...)';
-        Loading.loadingElement = UI.createElement('div', '', 'title');
-
-        let loadingText = UI.createElement('h1', 'Loading', '', Loading.loadingElement);
-        Loading.loadingInterval = setInterval(function() {
-            if (loadingText.innerHTML.endsWith('...')) loadingText.innerHTML = 'Loading';
-            else loadingText.innerHTML += '.';
-        }
-        , 500);
+        Loading.loadingElement = UI.createElement('div', '', 'loading');
     }
     
     static hideLoading() {
