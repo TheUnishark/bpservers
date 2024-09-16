@@ -253,6 +253,25 @@ input[type="radio"]:checked+label {
     translate: -50% -50%;
 }
 
+.info-tooltip {
+    cursor: help;
+    font-weight: bold;
+}
+
+#tooltip {
+    position: absolute;
+    background: #ebebeb;
+    color: black;
+    padding: 5px;
+    pointer-events: none;
+    opacity: 0;
+    transition: 0.2s;
+}
+
+#tooltip.fadeIn {
+    opacity: 1;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);

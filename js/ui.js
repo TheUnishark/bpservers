@@ -22,7 +22,7 @@ class UI {
     }
 
     static prepareHTML() {
-        document.body.innerHTML = '';
+        document.body.innerHTML = '<div id="tooltip">No Text</div>';
         UI.serverList = null;
     }
 
@@ -208,8 +208,8 @@ class UI {
             info.colSpan = Utils.mobileAndTabletCheck() ? 5 : 6;
 
             // Map
-            let map = UI.createElement('div', `<b>Map:</b> ${server.Map.Name}`, '', info);
-            map.title = `Filesize: ${Utils.getSize(server.Map.Filesize)}\nHash: ${server.Map.Hash}`;
+            let mapInfo = `Filesize: ${Utils.getSize(server.Map.Filesize)}\nHash: ${server.Map.Hash}`;
+            UI.createElement('div', `<b>Map:</b> ${server.Map.Name} <i class="fa-solid fa-circle-info info-tooltip" data-tooltip="${mapInfo}"></i>`, '', info);
             
             // Version
             UI.createElement('div', `<b>Version:</b> ${Utils.parseColorCodes((server.UpToDate ? '&2' : '&4') + server.Version)}`, '', info);
@@ -230,7 +230,7 @@ class UI {
             let pluginDetails = UI.createElement('div', '', 'content', pluginList);
             if (server.Plugins) {
                 server.Plugins.forEach(plugin => {
-                    pluginDetails.innerHTML += `<span title="${plugin.Description}">${plugin.Name}</span>`;
+                    pluginDetails.innerHTML += `<span>${plugin.Name} <i class="fa-solid fa-circle-info info-tooltip" data-tooltip="${plugin.Description}"></i></span>`;
                 })
             }
 
@@ -240,7 +240,7 @@ class UI {
             let assetsDetails = UI.createElement('div', '', 'content', assetsList);
             if (server.AssetBundles) {
                 server.AssetBundles.forEach(asset => {
-                    assetsDetails.innerHTML += `<span title="Filesize: ${Utils.getSize(asset.Filesize)}\nHash: ${asset.Hash}">${asset.Name}</span>`;
+                    assetsDetails.innerHTML += `<span>${asset.Name} <i class="fa-solid fa-circle-info info-tooltip" data-tooltip="Filesize: ${Utils.getSize(asset.Filesize)}\nHash: ${asset.Hash}"></i></span>`;
                 })
             }
 
@@ -272,5 +272,33 @@ class UI {
                 }
             }
         });
+
+        let tooltip = document.getElementById('tooltip');
+
+        document.querySelectorAll('.info-tooltip').forEach(x => {
+            x.onmouseenter = (e) => {
+                showTooltip(e.target);
+            }
+
+            x.onmouseleave = () => {
+                showTooltip(null, false);
+            }
+
+            x.onclick = (e) => {
+                showTooltip(e.target, !tooltip.classList.contains('fadeIn'));
+            }
+        });
+
+        let showTooltip = (icon = null, visible = true) => {
+            if (visible) {
+                let rect = icon.getBoundingClientRect();
+                tooltip.innerText = icon.dataset.tooltip ? icon.dataset.tooltip : 'No description.';
+                tooltip.style.top = `${rect.top + window.scrollY + (rect.height / 2) - (tooltip.clientHeight / 2)}px`;
+                tooltip.style.left = `${rect.left + rect.width + 5}px`;
+                tooltip.classList.add('fadeIn');
+            } else {
+                tooltip.classList.remove('fadeIn');
+            }
+        }
     }
 }
