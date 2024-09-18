@@ -188,7 +188,7 @@ select {
 }
 
 select.no-margin {
-    margin: 0 0 0 0.5em;
+    margin: 0 0.5em;
     ;
 }
 
@@ -243,11 +243,17 @@ label .checkmark:after {
 
 .label-button {
     cursor: pointer;
-    color: #888;
-    margin: 0 0.5em;
+    color: #3e3e3e;
+    margin: 0 0.1em;
     font-size: calc(1em + 4px);
     transition: 0.2s;
     user-select: none;
+    -webkit-text-stroke: 1px #8e8e8e;
+    text-stroke: 1px #8e8e8e;
+}
+
+input[type="radio"]:hover+label {
+    color: #8e8e8e;
 }
 
 input[type="radio"]:checked+label {
