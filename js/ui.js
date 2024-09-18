@@ -1,5 +1,6 @@
 class UI {
     static serverList = null;
+    static prevTooltip = null;
 
     static createElement(tag, innerHTML, className, parent) {
         parent = parent || document.body;
@@ -75,34 +76,35 @@ class UI {
         let visibility = UI.createElement('div', '', 'visibility', filters);
         let sorting = UI.createElement('div', '', 'sorting', filters);
 
-        let whitelist = UI.createElement('select', '<option value="any">Any</option><option value="disabled">Disabled</option><option value="enabled">Enabled</option>', '', visibility);
+        let whitelistLabel = UI.createElement('label', 'Whitelist:', '', visibility);
+        let whitelist = UI.createElement('select', '<option value="any">Any</option><option value="disabled">Disabled</option><option value="enabled">Enabled</option>', '', whitelistLabel);
         whitelist.id = 'whitelist';
         whitelist.onchange = function() {
             Sorting.filters.whitelist = whitelist.value;
             Sorting.sortServers();
             UI.fillServerList();
         }
-        UI.createLabel('Whitelist:', whitelist);
 
-        let validation = UI.createElement('select', '<option value="any">Any</option><option value="valid">Valid</option><option value="Invalid">Invalid</option>', '', visibility);
+        let validationLabel = UI.createElement('label', 'Validation:', '', visibility);
+        let validation = UI.createElement('select', '<option value="any">Any</option><option value="valid">Valid</option><option value="Invalid">Invalid</option>', '', validationLabel);
         validation.id = 'validation';
         validation.onchange = function() {
             Sorting.filters.validation = validation.value;
             Sorting.sortServers();
             UI.fillServerList();
         }
-        UI.createLabel('Validation:', validation);
 
-        let updated = UI.createElement('select', '<option value="any">Any</option><option value="current">Current</option><option value="outdated">Outdated</option>', '', visibility);
+        let updatedLabel =  UI.createElement('label', 'Version:', '', visibility);
+        let updated = UI.createElement('select', '<option value="any">Any</option><option value="current">Current</option><option value="outdated">Outdated</option>', '', updatedLabel);
         updated.id = 'updated';
         updated.onchange = function() {
             Sorting.filters.updated = updated.value;
             Sorting.sortServers();
             UI.fillServerList();
         }
-        UI.createLabel('Version:', updated);
 
-        let hideEmpty = UI.createElement('input', '', '', visibility);
+        let hideEmptyLabel =  UI.createElement('label', 'Hide Empty:', '', visibility);
+        let hideEmpty = UI.createElement('input', '', '', hideEmptyLabel);
         hideEmpty.type = 'checkbox';
         hideEmpty.id = 'hideEmpty';
         hideEmpty.onchange = function() {
@@ -110,18 +112,20 @@ class UI {
             Sorting.sortServers();
             UI.fillServerList();
         }
-        UI.createLabel('Hide Empty:', hideEmpty);
+        UI.createElement('span', '', 'checkmark', hideEmptyLabel);
 
-        let hideFull = UI.createElement('input', '', '', visibility);
+        let hideFullLabel =  UI.createElement('label', 'Hide Full:', '', visibility);
+        let hideFull = UI.createElement('input', '', '', hideFullLabel);
         hideFull.type = 'checkbox';
         hideFull.id = 'hideFull';
         hideFull.onchange = function() {
             Sorting.filters.hideFull = hideFull.checked;
             Sorting.sortServers();
         }
-        UI.createLabel('Hide Full:', hideFull);
+        UI.createElement('span', '', 'checkmark', hideFullLabel);
 
-        let select = UI.createElement('select', '', 'no-margin', sorting);
+        let selectLabel =  UI.createElement('label', 'Sort by:', '', sorting);
+        let select = UI.createElement('select', '', 'no-margin', selectLabel);
         select.id = 'sorting';
 
         let options = {
@@ -144,7 +148,6 @@ class UI {
             Sorting.sortServers();
             UI.fillServerList();
         }
-        UI.createLabel('Sort by:', select);
 
         let asc = UI.createElement('input', '', '', sorting);
         asc.type = 'radio';
@@ -285,7 +288,13 @@ class UI {
             }
 
             x.onclick = (e) => {
-                showTooltip(e.target, !tooltip.classList.contains('fadeIn'));
+                let shouldShow = this.prevTooltip ? this.prevTooltip != e.target : !tooltip.classList.contains('fadeIn');
+
+                if (shouldShow) {
+                    this.prevTooltip = e.target;
+                }
+
+                showTooltip(e.target, shouldShow);
             }
         });
 
