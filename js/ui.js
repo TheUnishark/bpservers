@@ -51,12 +51,6 @@ class UI {
         }
     }
 
-    static openInfo(element) {
-        let visible = element.checkVisibility();
-        document.querySelectorAll(".info").forEach(x => x.style.display = 'none');
-        element.style.display = visible ? 'none' : 'table-row';
-    }
-
     static buildUI() {
         let titleDiv = UI.createElement('div', '', 'title');
         let title = UI.createElement('h1', 'Broke Protocol Server List - Current Version: ', '', titleDiv);
@@ -201,14 +195,26 @@ class UI {
             let row = UI.createElement('tr', '', server.UpToDate ? '' : 'outdated', UI.serverList);
             row.onclick = function(e) {
                 if (e.target.className === 'button') return;
-                UI.openInfo(e.composedPath().find(x => x.localName === 'tr').nextElementSibling);
+
+                let targetInfo = this.nextElementSibling.querySelector('.info');
+                console.log(targetInfo)
+
+                document.querySelectorAll('.serverInfo .info').forEach(info => {
+                    if (info !== targetInfo) {
+                        info.classList.remove('show');
+                    }
+                });
+
+                targetInfo.classList.toggle('show');
             }
             row.title = `Total size: ${Utils.getSize(server.TotalSize)}`;
 
             // Server details
-            let subrow = UI.createElement('tr', '', 'info', UI.serverList);
-            let info = UI.createElement('td', '', '', subrow);
-            info.colSpan = Utils.mobileAndTabletCheck() ? 5 : 6;
+            let subrow = UI.createElement('tr', '', 'serverInfo', UI.serverList);
+            let td = UI.createElement('td', '', '', subrow);
+            td.colSpan = Utils.mobileAndTabletCheck() ? 5 : 6;
+            let wrapper = UI.createElement('div', '', 'info', td)
+            let info = UI.createElement('div', '', 'inner', wrapper);
 
             // Map
             let mapInfo = `Filesize: ${Utils.getSize(server.Map.Filesize)}\nHash: ${server.Map.Hash}`;

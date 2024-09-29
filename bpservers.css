@@ -1,3 +1,8 @@
+:root {
+    --border-radius: 5px;
+    --ui-border-radius: 3px;
+}
+
 * {
     font-size: 1em;
     font-family: sans-serif;
@@ -19,6 +24,7 @@ textarea,
 .button {
     font-size: 0.8em;
     padding: 5px;
+    border-radius: var(--ui-border-radius);
 }
 
 body {
@@ -48,6 +54,11 @@ summary {
     align-items: center;
     justify-content: flex-start;
     align-content: center;
+    border-radius: var(--border-radius);
+}
+
+details[open] summary {
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 
 summary:hover {
@@ -63,19 +74,28 @@ summary>* {
     background-color: #282828;
     display: flex;
     flex-direction: column;
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
 }
 
 .content>div {
     margin: 2px 0px
 }
 
-button {
-    background-color: #1d1dad;
+button, .button {
+    display: block;
+    width: fit-content;
+    background-color: #292993;
     color: white;
     font-weight: bold;
     border-style: none;
-    transition: 0.5s;
-    cursor: pointer
+    transition: 0.2s;
+    cursor: pointer;
+    padding: 7px;
+}
+
+button:hover,
+.button:hover {
+    background-color: #4242cf;
 }
 
 .title {
@@ -83,22 +103,6 @@ button {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-}
-
-.button {
-    display: block;
-    width: fit-content;
-    background-color: #1d1dad;
-    color: white;
-    font-weight: bold;
-    border-style: none;
-    transition: 0.5s;
-    cursor: pointer;
-}
-
-button:hover,
-.button:hover {
-    background-color: #00f;
 }
 
 table {
@@ -121,15 +125,39 @@ tr.outdated:hover {
     background-color: #3c2525;
 }
 
-tr.info {
-    display: none;
+tr.serverInfo {
     background-color: #181818;
     cursor: default;
     user-select: auto;
 }
 
-tr.info:hover {
+tr.serverInfo:hover {
     background-color: #181818;
+}
+
+tr.serverInfo td {
+    padding: 0;
+}
+
+.info {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease-out;
+}
+
+.info.show {
+    grid-template-rows: 1fr;
+}
+
+.info .inner {
+    padding: 0;
+    overflow: hidden;
+    text-align: left;
+    transition: 0.3s;
+}
+
+.info.show .inner {
+    padding: 0.5em 1em;
 }
 
 td {
@@ -149,14 +177,23 @@ tr.info td {
     text-align: left !important;
 }
 
+tr:last-child td:first-child {
+    border-bottom-left-radius: var(--border-radius);
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius: var(--border-radius);
+}
+
 .icon {
     height: 1em;
+    border-radius: var(--ui-border-radius);
 }
 
 .filters {
     background-color: rgb(34 34 34);
     padding: 0.5em 1em;
-    border-radius: 3px 3px 0 0;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 
 .filters div {
@@ -217,6 +254,7 @@ label .checkmark {
     margin: 0 2em 0 0.5em;
     background-color: #3e3e3e;
     border: 1px solid #8e8e8e;
+    border-radius: var(--ui-border-radius);
     transition: 0.2s;
 }
 
@@ -228,6 +266,7 @@ label .checkmark:after {
     content: "";
     position: absolute;
     display: none;
+    border-radius: calc((var(--ui-border-radius) / 3) * 2);
 }
 
 label input[type="checkbox"]:checked~.checkmark:after {
@@ -285,7 +324,7 @@ input[type="radio"]:checked+label {
     height: 80%;
     background-color: #262626;
     translate: -50% -50%;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     box-shadow: 3px 3px 20px 0px rgba(0, 0, 0, 0.3);
     padding: 10px 20px;
 }
