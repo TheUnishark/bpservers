@@ -40,7 +40,10 @@ class UI {
     
         UI.createElement('h2', 'News', '', modal);
     
-        let formattedNotes = BPServers.updateNotes.replace(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g, '').replace(/\n/g, '<br />');
+        let formattedNotes = BPServers.updateNotes
+            //.replace(/<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g, '')
+            .replace(/\n/g, '<br />')
+            .replace(/<color=#([A-Fa-f0-9]{6})>(.*?)<\/color>/g, '<b style="color: #$1">$2</b>');
         UI.createElement('div', formattedNotes, 'modal-content', modal);
     
         let modalClose = UI.createElement('i', '', 'fa-sharp fa-solid fa-xmark close', modal);
@@ -50,6 +53,7 @@ class UI {
             document.body.style.overflow = 'auto';
         }
     }
+
 
     static buildUI() {
         let titleDiv = UI.createElement('div', '', 'title');
