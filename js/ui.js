@@ -201,7 +201,6 @@ class UI {
                 if (e.target.className === 'button') return;
 
                 let targetInfo = this.nextElementSibling.querySelector('.info');
-                console.log(targetInfo)
 
                 document.querySelectorAll('.serverInfo .info').forEach(info => {
                     if (info !== targetInfo) {
