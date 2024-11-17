@@ -367,19 +367,11 @@ input[type="radio"]:checked+label {
     background:
         conic-gradient(from -90deg at calc(100% - var(--_d)) var(--_d),
         hsl(0, 0%, 100%) 135deg,hsl(0, 0%, 40%) 0 270deg,hsl(0, 0%, 67%) 0);
-    animation: l6 2s infinite;
+    animation: spin 2s infinite;
 }
 
 .loading:after {
     animation-delay:-1s;
-}
-
-@keyframes l6{
-    0%  {transform:translate(0,0);filter:brightness(1);}
-    25% {transform:translate(75px,0);filter:brightness(1);}
-    50% {transform:translate(75px,75px);filter:brightness(0.25);}
-    75% {transform:translate(0,75px);filter:brightness(0.25);}
-    100%{transform:translate(0,0);filter:brightness(1);}
 }
 
 .info-tooltip {
@@ -403,9 +395,27 @@ input[type="radio"]:checked+label {
 
 @keyframes spin {
     0% {
-        transform: rotate(0deg);
+        transform: translate(0, 0);
+        filter: brightness(1);
     }
+
+    25% {
+        transform: translate(75px, 0);
+        filter: brightness(1);
+    }
+
+    50% {
+        transform: translate(75px, 75px);
+        filter: brightness(0.25);
+    }
+
+    75% {
+        transform: translate(0, 75px);
+        filter: brightness(0.25);
+    }
+
     100% {
-        transform: rotate(360deg);
+        transform: translate(0, 0);
+        filter: brightness(1);
     }
 }
