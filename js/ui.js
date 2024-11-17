@@ -22,8 +22,19 @@ class UI {
         return e;
     }
 
+    static createDetails(title, content, parent) {
+        let details = UI.createElement('div', '', 'details', parent);
+        let summary = UI.createElement('div', title, 'summary', details);
+        let contentDOM = UI.createElement('div', null, 'details-content', details);
+        UI.createElement('div', content, 'details-inner', contentDOM);
+
+        summary.onclick = function() {
+            details.classList.toggle('open');
+        }
+    }
+
     static prepareHTML() {
-        document.body.innerHTML = '<div id="tooltip">No Text</div>';
+        document.body.innerHTML = '<div id="background"></div><div id="tooltip">No Text</div>';
         UI.serverList = null;
     }
 
@@ -63,7 +74,7 @@ class UI {
         news.onclick = function() {
             UI.openNews();
         }
-        UI.createElement('h2', `<span id="players-count">${BPServers.playerCount}</span> Players on <span id="servers-count">${Servers.filteredServers.length}</span> servers:`, '');
+        UI.createElement('h2', `<span id="players-count">${BPServers.playerCount}</span> Players on <span id="servers-count">${Servers.filteredServers.length}</span> servers:`, 'subtitle');
         
         let button = UI.createElement('button', 'Refresh', '', titleDiv);
         button.onclick = function() {
@@ -195,20 +206,33 @@ class UI {
         document.getElementById('players-count').innerHTML = BPServers.playerCount;
 	    document.getElementById('servers-count').innerHTML = Servers.filteredServers.length;
 
+        let count = 0;
         Servers.filteredServers.forEach(server => {
-            let row = UI.createElement('tr', '', server.UpToDate ? '' : 'outdated', UI.serverList);
+            count++;
+            let classNames = [];
+            if (!server.UpToDate) classNames.push('outdated');
+            if (count === Servers.filteredServers.length) {
+                classNames.push('last-server');
+                classNames.push('force-borders')
+            }
+
+            let row = UI.createElement('tr', '', classNames.join(' '), UI.serverList);
             row.onclick = function(e) {
                 if (e.target.className === 'button') return;
 
-                let targetInfo = this.nextElementSibling.querySelector('.info');
+                let targetInfo = this.nextElementSibling;
 
-                document.querySelectorAll('.serverInfo .info').forEach(info => {
+                document.querySelectorAll('.serverInfo').forEach(info => {
                     if (info !== targetInfo) {
                         info.classList.remove('show');
                     }
                 });
 
                 targetInfo.classList.toggle('show');
+
+                const lastServer = document.querySelector('.last-server');
+                if (lastServer.nextElementSibling.classList.contains('show')) lastServer.classList.remove('force-borders');
+                else lastServer.classList.add('force-borders');
             }
             row.title = `Total size: ${Utils.getSize(server.TotalSize)}`;
 
@@ -237,24 +261,22 @@ class UI {
             UI.createElement('div', url, '', info);
             
             // Plugins
-            let pluginList = UI.createElement('details', '', '', info);
-            UI.createElement('summary', `<b>Plugins (${server.Plugins ? server.Plugins.length : 0}):</b>`, '', pluginList);
-            let pluginDetails = UI.createElement('div', '', 'content', pluginList);
+            let pluginDetails = '';
             if (server.Plugins) {
                 server.Plugins.forEach(plugin => {
-                    pluginDetails.innerHTML += `<span>${plugin.Name} <i class="fa-solid fa-circle-info info-tooltip" data-tooltip="${plugin.Description}"></i></span>`;
+                    pluginDetails += `<span>${plugin.Name} <i class="fa-solid fa-circle-info info-tooltip" data-tooltip="${plugin.Description}"></i></span>`;
                 })
             }
+            UI.createDetails(`<b>Plugins (${server.Plugins ? server.Plugins.length : 0}):</b>`, pluginDetails, info);
 
             // Assets
-            let assetsList = UI.createElement('details', '', '', info);
-            UI.createElement('summary', `<b>Asset Bundles (${server.AssetBundles ? server.AssetBundles.length : 0}) [${Utils.getSize(server.TotalAssetsSize)}]:</b>`, '', assetsList);
-            let assetsDetails = UI.createElement('div', '', 'content', assetsList);
+            let assetDetails = '';
             if (server.AssetBundles) {
                 server.AssetBundles.forEach(asset => {
-                    assetsDetails.innerHTML += `<span>${asset.Name} <i class="fa-solid fa-circle-info info-tooltip" data-tooltip="Filesize: ${Utils.getSize(asset.Filesize)}\nHash: ${asset.Hash}"></i></span>`;
+                    assetDetails += `<span>${asset.Name} <i class="fa-solid fa-circle-info info-tooltip" data-tooltip="Filesize: ${Utils.getSize(asset.Filesize)}\nHash: ${asset.Hash}"></i></span>`;
                 })
             }
+            UI.createDetails(`<b>Asset Bundles (${server.AssetBundles ? server.AssetBundles.length : 0}) [${Utils.getSize(server.TotalAssetsSize)}]:</b>`, assetDetails, info);
 
             // Whitelist
             UI.createElement('td', server.Whitelist ? '<i class="fa-solid fa-lock"></i>' : '<i class="fa-solid fa-lock-open"></i>', '', row);
