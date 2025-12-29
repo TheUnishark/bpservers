@@ -145,7 +145,8 @@ class UI {
             'name': 'Name',
             'players': 'Players',
             'version': 'Version',
-            'size': 'Server Size'
+            'size': 'Server Size',
+            'rank': 'Rank',
         }
 
         Object.keys(options).forEach(key => {
@@ -252,6 +253,9 @@ class UI {
             
             // IP
             UI.createElement('div', `<b>IP:</b> ${server.IP}:${server.Port}`, '', info);
+
+            // Rank
+            UI.createElement('div', `<b>Rank:</b> ${server.Rank}`, '', info);
             
             // Difficulty
             UI.createElement('div', `<b>Difficulty:</b> ${parseFloat(server.Difficulty)*100}%`, '', info);

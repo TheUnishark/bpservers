@@ -63,6 +63,10 @@ class Sorting {
                 Servers.filteredServers.sort((a, b) => a.TotalSize - b.TotalSize);
                 if (desc) Servers.filteredServers = Servers.filteredServers.reverse();
                 break;
+            case 'rank':
+                Servers.filteredServers.sort((a, b) => a.Rank - b.Rank);
+                if (desc) Servers.filteredServers = Servers.filteredServers.reverse();
+                break;
             case 'default':
             default:
                 Servers.filteredServers = Sorting.applyFilters(structuredClone(Servers.servers));
