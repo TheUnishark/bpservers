@@ -15,16 +15,16 @@ import type { Server, TooltipState } from './types/bpservers'
 import { serverKey } from './utils/servers'
 
 const {
-  countries,
-  filteredServers,
-  filters,
-  loadError,
-  loading,
-  loadFilters,
-  playerCount,
-  reload,
-  updateNotes,
-  version,
+	countries,
+	filteredServers,
+	filters,
+	loadError,
+	loading,
+	loadFilters,
+	playerCount,
+	reload,
+	updateNotes,
+	version,
 } = useServerList()
 
 const { isMobile } = useViewport()
@@ -32,73 +32,61 @@ const { isMobile } = useViewport()
 const expandedServer = ref<string | null>(null)
 const newsOpen = ref(false)
 const tooltip = ref<TooltipState>({
-  visible: false,
-  text: 'No description.',
-  top: 0,
-  left: 0,
+	visible: false,
+	text: 'No description.',
+	top: 0,
+	left: 0,
 })
 
 provide(tooltipContextKey, {
-  showTooltip(target, text) {
-    const rect = target.getBoundingClientRect()
+	showTooltip(target, text) {
+		const rect = target.getBoundingClientRect()
 
-    tooltip.value = {
-      visible: true,
-      text: text || 'No description.',
-      top: rect.top + window.scrollY + rect.height / 2,
-      left: rect.left + rect.width + 5,
-    }
-  },
-  hideTooltip() {
-    tooltip.value.visible = false
-  },
+		tooltip.value = {
+			visible: true,
+			text: text || 'No description.',
+			top: rect.top + window.scrollY + rect.height / 2,
+			left: rect.left + rect.width + 5,
+		}
+	},
+	hideTooltip() {
+		tooltip.value.visible = false
+	},
 })
 
 onMounted(() => {
-  loadFilters()
-  void reload()
+	loadFilters()
+	void reload()
 })
 
 function refresh() {
-  expandedServer.value = null
-  void reload()
+	expandedServer.value = null
+	void reload()
 }
 
 function toggleServer(server: Server) {
-  const key = serverKey(server)
-  expandedServer.value = expandedServer.value === key ? null : key
+	const key = serverKey(server)
+	expandedServer.value = expandedServer.value === key ? null : key
 }
 </script>
 
 <template>
-  <AppBackground />
-  <TooltipOverlay :tooltip="tooltip" />
+	<AppBackground />
+	<TooltipOverlay :tooltip="tooltip" />
 
-  <main>
-    <LoadingIndicator v-if="loading" />
+	<main>
+		<LoadingIndicator v-if="loading" />
 
-    <ErrorState v-if="loadError" @refresh="refresh" />
+		<ErrorState v-if="loadError" @refresh="refresh" />
 
-    <template v-else>
-      <AppHeader
-        :player-count="playerCount"
-        :server-count="filteredServers.length"
-        :version="version"
-        @open-news="newsOpen = true"
-        @refresh="refresh"
-      />
+		<template v-else>
+			<AppHeader :player-count="playerCount" :server-count="filteredServers.length" :version="version" @open-news="newsOpen = true" @refresh="refresh" />
 
-      <ServerFilters v-model="filters" />
+			<ServerFilters v-model="filters" />
 
-      <ServerTable
-        :countries="countries"
-        :expanded-server="expandedServer"
-        :is-mobile="isMobile"
-        :servers="filteredServers"
-        @toggle-server="toggleServer"
-      />
-    </template>
-  </main>
+			<ServerTable :countries="countries" :expanded-server="expandedServer" :is-mobile="isMobile" :servers="filteredServers" @toggle-server="toggleServer" />
+		</template>
+	</main>
 
-  <NewsModal v-if="newsOpen" :update-notes="updateNotes" @close="newsOpen = false" />
+	<NewsModal v-if="newsOpen" :update-notes="updateNotes" @close="newsOpen = false" />
 </template>
