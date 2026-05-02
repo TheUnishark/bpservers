@@ -78,6 +78,11 @@ a {
     border-width: 1px 1px 0 1px;
 }
 
+.details[open] .summary {
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    border-width: 1px 1px 0 1px;
+}
+
 .details-content {
     display: grid;
     grid-template-rows: 0fr;
@@ -103,6 +108,13 @@ a {
 }
 
 .details.open .details-content {
+    grid-template-rows: 1fr;
+    border: 1px solid var(--hover-color);
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    background: var(--background-color);
+}
+
+.details[open] .details-content {
     grid-template-rows: 1fr;
     border: 1px solid var(--hover-color);
     border-radius: 0 0 var(--border-radius) var(--border-radius);
@@ -359,6 +371,14 @@ input[type="radio"]:checked+label {
     cursor: help;
     user-select: none;
     text-decoration: underline dotted 2px;
+}
+
+.valid {
+    color: #0f0;
+}
+
+.invalid {
+    color: #f00;
 }
 
 .modal-background {
