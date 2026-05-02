@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import InfoTooltip from './InfoTooltip.vue'
+import InfoTooltip from './InfoTooltip.vue';
 
 interface DetailItem {
-	id: string
-	name: string
-	tooltip?: string
+	id: string;
+	name: string;
+	tooltip?: string;
 }
 
 defineProps<{
-	title: string
-	items?: DetailItem[]
-}>()
+	title: string;
+	items?: DetailItem[];
+}>();
 </script>
 
 <template>

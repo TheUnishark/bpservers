@@ -1,6 +1,6 @@
-import type { Filters, SortKey } from '../types/bpservers'
+import type { Filters, SortKey } from '../types/bpservers';
 
-export const appName = 'BP Server List'
+export const appName = 'BP Server List';
 
 export const defaultFilters: Filters = {
 	whitelist: 'any',
@@ -10,7 +10,7 @@ export const defaultFilters: Filters = {
 	hideFull: false,
 	sorting: 'default',
 	sortingOrder: 'asc',
-}
+};
 
 export const sortOptions: Record<SortKey, string> = {
 	default: 'Default',
@@ -22,7 +22,7 @@ export const sortOptions: Record<SortKey, string> = {
 	version: 'Version',
 	size: 'Server Size',
 	rank: 'Rank',
-}
+};
 
 export const colorCodes: Record<string, string> = {
 	'0': '000000',
@@ -41,4 +41,4 @@ export const colorCodes: Record<string, string> = {
 	d: 'FF55FF',
 	e: 'FFFF55',
 	f: 'FFFFFF',
-}
+};

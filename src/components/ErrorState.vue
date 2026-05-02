@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineEmits<{
-	refresh: []
-}>()
+	refresh: [];
+}>();
 </script>
 
 <template>

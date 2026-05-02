@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { sortOptions } from '../constants/bpservers'
-import type { Filters } from '../types/bpservers'
+import { sortOptions } from '../constants/bpservers';
+import type { Filters } from '../types/bpservers';
 
-const filters = defineModel<Filters>({ required: true })
+const filters = defineModel<Filters>({ required: true });
 </script>
 
 <template>
@@ -52,7 +52,11 @@ const filters = defineModel<Filters>({ required: true })
 			<label>
 				Sort by:
 				<select v-model="filters.sorting" class="no-margin">
-					<option v-for="(label, value) in sortOptions" :key="value" :value="value">
+					<option
+						v-for="(label, value) in sortOptions"
+						:key="value"
+						:value="value"
+					>
 						{{ label }}
 					</option>
 				</select>
@@ -61,7 +65,12 @@ const filters = defineModel<Filters>({ required: true })
 			<input id="asc" v-model="filters.sortingOrder" type="radio" value="asc" />
 			<label class="label-button" for="asc" title="Ascending">&#9650;</label>
 
-			<input id="desc" v-model="filters.sortingOrder" type="radio" value="desc" />
+			<input
+				id="desc"
+				v-model="filters.sortingOrder"
+				type="radio"
+				value="desc"
+			/>
 			<label class="label-button" for="desc" title="Descending">&#9660;</label>
 		</div>
 	</section>

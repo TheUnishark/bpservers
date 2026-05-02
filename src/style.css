@@ -95,15 +95,15 @@ a {
 	flex-direction: column;
 }
 
-.details-inner>* {
+.details-inner > * {
 	padding: 0 10px;
 }
 
-.details-inner>*:first-child {
+.details-inner > *:first-child {
 	padding-top: 10px;
 }
 
-.details-inner>*:last-child {
+.details-inner > *:last-child {
 	padding-bottom: 10px;
 }
 
@@ -129,8 +129,8 @@ a {
 	border-radius: 0 0 var(--border-radius) var(--border-radius);
 }
 
-.content>div {
-	margin: 2px 0px
+.content > div {
+	margin: 2px 0px;
 }
 
 button,
@@ -294,14 +294,13 @@ select {
 
 select.no-margin {
 	margin: 0 0.5em;
-	;
 }
 
 select:focus {
 	outline: none;
 }
 
-input[type="radio"] {
+input[type='radio'] {
 	display: none;
 }
 
@@ -311,7 +310,7 @@ label {
 	align-items: center;
 }
 
-label input[type="checkbox"] {
+label input[type='checkbox'] {
 	display: none;
 }
 
@@ -326,18 +325,18 @@ label .checkmark {
 	transition: 0.2s;
 }
 
-label:hover input[type="checkbox"]~.checkmark {
+label:hover input[type='checkbox'] ~ .checkmark {
 	background-color: var(--hover-color);
 }
 
 label .checkmark:after {
-	content: "";
+	content: '';
 	position: absolute;
 	display: none;
 	border-radius: calc((var(--ui-border-radius) / 3) * 2);
 }
 
-label input[type="checkbox"]:checked~.checkmark:after {
+label input[type='checkbox']:checked ~ .checkmark:after {
 	display: block;
 }
 
@@ -359,11 +358,11 @@ label .checkmark:after {
 	text-stroke: 1px var(--hover-color);
 }
 
-input[type="radio"]:hover+label {
+input[type='radio']:hover + label {
 	color: var(--hover-color);
 }
 
-input[type="radio"]:checked+label {
+input[type='radio']:checked + label {
 	color: #fff;
 	text-shadow: rgb(255 255 255 / 30%) 0 0 15px;
 }
@@ -406,12 +405,12 @@ input[type="radio"]:checked+label {
 	padding: 10px 20px;
 }
 
-.modal>.modal-content {
+.modal > .modal-content {
 	overflow: auto;
 	height: calc(100% - 80px);
 }
 
-.modal>.close {
+.modal > .close {
 	font-size: xx-large;
 	position: absolute;
 	right: 20px;
@@ -421,13 +420,13 @@ input[type="radio"]:checked+label {
 	overflow: hidden;
 }
 
-.modal>.close:hover {
+.modal > .close:hover {
 	color: #fff;
 }
 
 .loading {
 	--s: 50px;
-	--_d: calc(0.353*var(--s));
+	--_d: calc(0.353 * var(--s));
 	width: calc(var(--s) + var(--_d));
 	position: absolute;
 	top: calc(50% - (var(--s) / 2 + var(--_d) / 2));
@@ -438,12 +437,22 @@ input[type="radio"]:checked+label {
 
 .loading:before,
 .loading:after {
-	content: "";
+	content: '';
 	grid-area: 1/1;
-	clip-path: polygon(var(--_d) 0, 100% 0, 100% calc(100% - var(--_d)), calc(100% - var(--_d)) 100%, 0 100%, 0 var(--_d));
-	background:
-		conic-gradient(from -90deg at calc(100% - var(--_d)) var(--_d),
-			hsl(0, 0%, 100%) 135deg, hsl(0, 0%, 40%) 0 270deg, hsl(0, 0%, 67%) 0);
+	clip-path: polygon(
+		var(--_d) 0,
+		100% 0,
+		100% calc(100% - var(--_d)),
+		calc(100% - var(--_d)) 100%,
+		0 100%,
+		0 var(--_d)
+	);
+	background: conic-gradient(
+		from -90deg at calc(100% - var(--_d)) var(--_d),
+		hsl(0, 0%, 100%) 135deg,
+		hsl(0, 0%, 40%) 0 270deg,
+		hsl(0, 0%, 67%) 0
+	);
 	animation: spin 2s infinite;
 }
 
