@@ -14,14 +14,24 @@ export function escapeHtml(value: string) {
 
 export function parseColorCodes(value: string) {
 	let escaped = escapeHtml(value);
-	const regex = /&amp;+([a-f0-9])/i;
+	const regex =
+		/(?:&amp;+([a-f0-9])|&lt;color=(#(?:[A-Fa-f0-9]{6})|[a-z]+)&gt;)/i;
 	let hasPrevious = false;
 
 	while (regex.test(escaped)) {
-		const color = escaped.match(regex)?.[1].toLowerCase() ?? 'f';
+		const match = escaped.match(regex);
+		if (!match) {
+			break;
+		}
+
+		const [, code, namedColor] = match;
+		const color = code
+			? (colorCodes[code.toLowerCase()] ?? colorCodes.f)
+			: namedColor;
+
 		escaped = escaped.replace(
 			regex,
-			`${hasPrevious ? '</span>' : ''}<span style="color:#${colorCodes[color]}">`,
+			`${hasPrevious ? '</span>' : ''}<span style="color:${code ? `#${color}` : color}">`,
 		);
 		hasPrevious = true;
 	}
