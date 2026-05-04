@@ -77,7 +77,7 @@ function toggleServer(server: Server) {
 	<main>
 		<LoadingIndicator v-if="loading" />
 
-		<ErrorState v-if="loadError" @refresh="refresh" />
+		<ErrorState v-else-if="loadError" @refresh="refresh" />
 
 		<template v-else>
 			<AppHeader
