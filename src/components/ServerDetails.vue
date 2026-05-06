@@ -26,7 +26,8 @@ const assetItems = props.server.AssetBundles?.map((asset) => ({
 	<div class="info">
 		<div class="inner">
 			<div>
-				<b>Map:</b> {{ server.Map.Name }}
+				<b>Map:</b>
+				{{ server.Map.Name }}
 				<InfoTooltip
 					:text="`Filesize: ${getSize(server.Map.Filesize)}\nHash: ${server.Map.Hash}`"
 				/>
@@ -37,11 +38,20 @@ const assetItems = props.server.AssetBundles?.map((asset) => ({
 					v-html="
 						parseColorCodes(`${server.UpToDate ? '&2' : '&4'}${server.Version}`)
 					"
-				></span>
+				/>
 			</div>
-			<div><b>IP:</b> {{ server.IP }}:{{ server.Port }}</div>
-			<div><b>Rank:</b> {{ server.Rank }}</div>
-			<div><b>Difficulty:</b> {{ Number(server.Difficulty) * 100 }}%</div>
+			<div>
+				<b>IP:</b>
+				{{ server.IP }}:{{ server.Port }}
+			</div>
+			<div>
+				<b>Rank:</b>
+				{{ server.Rank }}
+			</div>
+			<div>
+				<b>Difficulty:</b>
+				{{ Number(server.Difficulty) * 100 }}%
+			</div>
 			<div v-if="server.URL">
 				<b>URL:</b>
 				<a :href="serverUrl(server)" target="_blank" rel="noreferrer">

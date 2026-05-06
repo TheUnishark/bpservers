@@ -30,14 +30,14 @@ defineEmits<{
 		<td :title="server.Whitelist ? 'Whitelist enabled' : 'Whitelist disabled'">
 			<i
 				:class="server.Whitelist ? 'fa-solid fa-lock' : 'fa-solid fa-lock-open'"
-			></i>
+			/>
 		</td>
 		<td :title="server.Valid ? 'Valid' : 'Invalid'">
 			<i
 				:class="[
 					server.Valid ? 'fa-solid fa-check valid' : 'fa-solid fa-x invalid',
 				]"
-			></i>
+			/>
 		</td>
 		<td>
 			<img
@@ -52,7 +52,9 @@ defineEmits<{
 				{{ server.Location }}
 			</span>
 		</td>
-		<td class="name"><b v-html="parseColorCodes(server.Name)"></b></td>
+		<td class="name">
+			<b v-html="parseColorCodes(server.Name)" />
+		</td>
 		<td>({{ server.PlayerCount }}/{{ server.PlayerLimit }})</td>
 		<td v-if="!isMobile">
 			<button

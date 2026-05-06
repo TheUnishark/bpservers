@@ -1,3 +1,3 @@
 <template>
-	<div class="loading" aria-label="Loading"></div>
+	<div class="loading" aria-label="Loading" />
 </template>

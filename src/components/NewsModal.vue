@@ -14,10 +14,10 @@ const formattedNews = computed(() => formatNews(props.updateNotes));
 </script>
 
 <template>
-	<div class="modal-background" @click="$emit('close')"></div>
+	<div class="modal-background" @click="$emit('close')" />
 	<section class="modal" role="dialog" aria-modal="true" aria-label="News">
 		<h2>News</h2>
-		<div class="modal-content" v-html="formattedNews"></div>
+		<div class="modal-content" v-html="formattedNews" />
 		<i
 			class="fa-sharp fa-solid fa-xmark close"
 			role="button"
@@ -26,6 +26,6 @@ const formattedNews = computed(() => formatNews(props.updateNotes));
 			@click="$emit('close')"
 			@keydown.enter="$emit('close')"
 			@keydown.space.prevent="$emit('close')"
-		></i>
+		/>
 	</section>
 </template>

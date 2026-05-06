@@ -31,7 +31,9 @@ defineEmits<{
 	</header>
 
 	<h2 class="subtitle">
-		<span>{{ playerCount }}</span> Players on
-		<span>{{ serverCount }}</span> servers:
+		<span>{{ playerCount }}</span>
+		Players on
+		<span>{{ serverCount }}</span>
+		servers:
 	</h2>
 </template>

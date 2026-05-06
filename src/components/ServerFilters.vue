@@ -38,13 +38,13 @@ const filters = defineModel<Filters>({ required: true });
 			<label>
 				Hide Empty:
 				<input v-model="filters.hideEmpty" type="checkbox" />
-				<span class="checkmark"></span>
+				<span class="checkmark" />
 			</label>
 
 			<label>
 				Hide Full:
 				<input v-model="filters.hideFull" type="checkbox" />
-				<span class="checkmark"></span>
+				<span class="checkmark" />
 			</label>
 		</div>
 

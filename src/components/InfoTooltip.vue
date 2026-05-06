@@ -21,5 +21,5 @@ function show(event: MouseEvent | FocusEvent) {
 		@mouseleave="tooltip?.hideTooltip"
 		@focus="show"
 		@blur="tooltip?.hideTooltip"
-	></i>
+	/>
 </template>
