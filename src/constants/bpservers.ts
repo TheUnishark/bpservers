@@ -10,6 +10,7 @@ export const defaultFilters: Filters = {
 	hideFull: false,
 	sorting: 'default',
 	sortingOrder: 'asc',
+	banList: true,
 };
 
 export const sortOptions: Record<SortKey, string> = {

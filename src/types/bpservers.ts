@@ -60,6 +60,7 @@ export interface Filters {
 	hideFull: boolean;
 	sorting: SortKey;
 	sortingOrder: SortOrder;
+	banList: boolean;
 }
 
 export interface CountryInfo {

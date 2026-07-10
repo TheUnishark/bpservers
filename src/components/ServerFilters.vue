@@ -46,6 +46,12 @@ const filters = defineModel<Filters>({ required: true });
 				<input v-model="filters.hideFull" type="checkbox" />
 				<span class="checkmark" />
 			</label>
+
+			<label>
+				Hide Banned:
+				<input v-model="filters.banList" type="checkbox" />
+				<span class="checkmark" />
+			</label>
 		</div>
 
 		<div class="sorting">

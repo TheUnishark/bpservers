@@ -64,3 +64,20 @@ export function connectToServer(server: Server) {
 
 	window.location.href = `steam://run/696370//-connect ${server.IP}:${server.Port}/`;
 }
+
+export function ipToInt(ip: string): number {
+	return ip
+		.split('.')
+		.reduce((acc, octet) => ((acc << 8) | Number(octet)) >>> 0, 0);
+}
+
+export function isIpInRange(ip: string, cidr: string): boolean {
+	const [network, prefix = '32'] = cidr.split('/');
+	const prefixLength = Number(prefix);
+	const mask =
+		prefixLength === 0 ? 0 : (0xffffffff << (32 - prefixLength)) >>> 0;
+	const ipInt = ipToInt(ip);
+	const rangeInt = ipToInt(network);
+
+	return (ipInt & mask) === (rangeInt & mask);
+}

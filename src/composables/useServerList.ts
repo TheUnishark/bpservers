@@ -7,7 +7,12 @@ import {
 	getVersion,
 } from '../services/bpserversApi';
 import type { Filters, Server } from '../types/bpservers';
-import { dedupeServersByAddress, prepareServer } from '../utils/servers';
+import {
+	dedupeServersByAddress,
+	prepareServer,
+	isIpInRange,
+} from '../utils/servers';
+import { useBanList } from './useBanList';
 
 export function useServerList() {
 	const filters = ref<Filters>({ ...defaultFilters });
@@ -15,6 +20,7 @@ export function useServerList() {
 	const version = ref('');
 	const updateNotes = ref('');
 	const countries = ref<Record<string, string>>({});
+	const banList = ref<string[]>([]);
 	const loading = ref(false);
 	const loadError = ref(false);
 
@@ -40,6 +46,10 @@ export function useServerList() {
 			if (filters.value.hideEmpty && server.PlayerCount < 1) return false;
 			if (filters.value.hideFull && server.PlayerCount >= server.PlayerLimit)
 				return false;
+			if (filters.value.banList && banList.value.length) {
+				if (banList.value.some((ip) => isIpInRange(server.IP, ip)))
+					return false;
+			}
 			return true;
 		});
 
@@ -113,19 +123,22 @@ export function useServerList() {
 		document.title = `${appName} (Loading...)`;
 
 		try {
-			const [latestVersion, news, serverList, countryList] = await Promise.all([
-				getVersion(),
-				getNews(),
-				getServers(),
-				getCountries().catch((error) => {
-					console.error(error);
-					return {};
-				}),
-			]);
+			const [latestVersion, news, serverList, countryList, banListData] =
+				await Promise.all([
+					getVersion(),
+					getNews(),
+					getServers(),
+					getCountries().catch((error) => {
+						console.error(error);
+						return {};
+					}),
+					useBanList(),
+				]);
 
 			version.value = latestVersion.replace(/(\r\n|\n|\r)/gm, '');
 			updateNotes.value = news;
 			countries.value = countryList;
+			banList.value = banListData;
 			servers.value = dedupeServersByAddress(serverList).map((server) =>
 				prepareServer(server, version.value),
 			);
